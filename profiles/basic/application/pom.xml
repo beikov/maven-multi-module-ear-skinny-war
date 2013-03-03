@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>example.profiles</groupId>
+		<artifactId>basic-profile</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>basic-profile-application</artifactId>
+	<packaging>ear</packaging>
+
+	<name>Basic Profile Application</name>
+	<description>Parent POM for Basic Profile Application.</description>
+	
+	<dependencies>
+		<dependency>
+			<groupId>example.modules</groupId>
+			<artifactId>core-module-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>example.modules</groupId>
+			<artifactId>core-module-model</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>example.modules</groupId>
+			<artifactId>core-module-impl</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>example.profiles</groupId>
+			<artifactId>basic-profile-aggregations-web-final</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-ear-plugin</artifactId>
+				<configuration>
+					<version>6</version>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<defaultJavaBundleDir>lib</defaultJavaBundleDir>
+					<skinnyWars>true</skinnyWars>
+					<modules>
+						<webModule>
+							<groupId>example.profiles</groupId>
+							<artifactId>basic-profile-aggregations-web-final</artifactId>
+							<contextRoot>/</contextRoot>
+						</webModule>
+						<ejbModule>
+							<groupId>example.modules</groupId>
+							<artifactId>core-module-impl</artifactId>
+                        </ejbModule>
+					</modules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
